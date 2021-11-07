@@ -1339,6 +1339,9 @@
   "mainnet": {
     "message": "Ethereum Mainnet"
   },
+  "optimism": {
+    "message": "Ethereum Optimism"
+  },
   "makeAnotherSwap": {
     "message": "Create a new swap"
   },
@@ -2779,8 +2782,17 @@
   "total": {
     "message": "Total"
   },
+  "totalOnMainnet": {
+    "message": "Total On Mainnet"
+  },
+  "totalOnOptimism": {
+    "message": "Total On Optimism"
+  },
   "transaction": {
     "message": "transaction"
+  },
+  "txCost": {
+    "message": "TX cost"
   },
   "transactionCancelAttempted": {
     "message": "Transaction cancel attempted with estimated gas fee of $1 at $2"
