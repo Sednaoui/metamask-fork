@@ -411,144 +411,84 @@ export default class ConfirmTransactionBase extends Component {
     return (
       <div className="confirm-page-container-content__details">
         <TransactionDetail
-          onEdit={() => this.handleEditGas()}
           rows={[
-            EIP_1559_V2 ? (
-              <GasDetailsItem
-                key="gas_details"
-                hexMaximumTransactionFee={hexMaximumTransactionFee}
-                hexMinimumTransactionFee={hexMinimumTransactionFee}
-                isMainnet={isMainnet}
-                maxFeePerGas={maxFeePerGas}
-                maxPriorityFeePerGas={maxPriorityFeePerGas}
-                supportsEIP1559={supportsEIP1559}
-                txData={txData}
-                useNativeCurrencyAsPrimaryCurrency={
-                  useNativeCurrencyAsPrimaryCurrency
-                }
-              />
-            ) : (
-              <TransactionDetailItem
-                key="gas-item"
-                detailTitle={
-                  txData.dappSuggestedGasFees ? (
-                    <>
-                      {t('transactionDetailGasHeading')}
-                      <InfoTooltip
-                        contentText={t('transactionDetailDappGasTooltip')}
-                        position="top"
-                      >
-                        <i className="fa fa-info-circle" />
-                      </InfoTooltip>
-                    </>
-                  ) : (
-                    <>
-                      {t('transactionDetailGasHeading')}
-                      <InfoTooltip
-                        contentText={
-                          <>
-                            <p>
-                              {t('transactionDetailGasTooltipIntro', [
-                                isMainnet ? t('networkNameEthereum') : '',
-                              ])}
-                            </p>
-                            <p>{t('transactionDetailGasTooltipExplanation')}</p>
-                            <p>
-                              <a
-                                href="https://community.metamask.io/t/what-is-gas-why-do-transactions-take-so-long/3172"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {t('transactionDetailGasTooltipConversion')}
-                              </a>
-                            </p>
-                          </>
-                        }
-                        position="top"
-                      >
-                        <i className="fa fa-info-circle" />
-                      </InfoTooltip>
-                    </>
-                  )
-                }
-                detailTitleColor={COLORS.BLACK}
-                detailText={
-                  <div className="confirm-page-container-content__currency-container">
-                    {renderHeartBeatIfNotInTest()}
-                    <UserPreferencedCurrencyDisplay
-                      type={SECONDARY}
-                      value={hexMinimumTransactionFee}
-                      hideLabel={Boolean(useNativeCurrencyAsPrimaryCurrency)}
-                    />
-                  </div>
-                }
-                detailTotal={
-                  <div className="confirm-page-container-content__currency-container">
-                    {renderHeartBeatIfNotInTest()}
-                    <UserPreferencedCurrencyDisplay
-                      type={PRIMARY}
-                      value={hexMinimumTransactionFee}
-                      hideLabel={!useNativeCurrencyAsPrimaryCurrency}
-                    />
-                  </div>
-                }
-                subText={t('editGasSubTextFee', [
-                  <b key="editGasSubTextFeeLabel">
-                    {t('editGasSubTextFeeLabel')}
-                  </b>,
-                  <div
-                    key="editGasSubTextFeeValue"
-                    className="confirm-page-container-content__currency-container"
-                  >
-                    {renderHeartBeatIfNotInTest()}
-                    <UserPreferencedCurrencyDisplay
-                      key="editGasSubTextFeeAmount"
-                      type={PRIMARY}
-                      value={hexMaximumTransactionFee}
-                      hideLabel={!useNativeCurrencyAsPrimaryCurrency}
-                    />
-                  </div>,
-                ])}
-                subTitle={
-                  <>
-                    {txData.dappSuggestedGasFees ? (
-                      <Typography
-                        variant={TYPOGRAPHY.H7}
-                        fontStyle={FONT_STYLE.ITALIC}
-                        color={COLORS.UI4}
-                      >
-                        {t('transactionDetailDappGasMoreInfo')}
-                      </Typography>
-                    ) : (
-                      ''
-                    )}
-                    {supportsEIP1559 && (
-                      <GasTiming
-                        maxPriorityFeePerGas={hexWEIToDecGWEI(
-                          maxPriorityFeePerGas ||
-                            txData.txParams.maxPriorityFeePerGas,
-                        )}
-                        maxFeePerGas={hexWEIToDecGWEI(
-                          maxFeePerGas || txData.txParams.maxFeePerGas,
-                        )}
-                      />
-                    )}
-                  </>
-                }
-              />
-            ),
             <TransactionDetailItem
               key="total-item"
-              detailTitle={t('total')}
-              detailText={renderTotalDetailText()}
-              detailTotal={renderTotalDetailTotal()}
-              subTitle={t('transactionDetailGasTotalSubtitle')}
-              subText={t('editGasSubTextAmount', [
-                <b key="editGasSubTextAmountLabel">
-                  {t('editGasSubTextAmountLabel')}
-                </b>,
-                renderTotalMaxAmount(),
-              ])}
+              detailTitle={t('mainnet')}
+              detailTotal="1 ETH $2335.45"
+              subTitle={
+                <>
+                  {t('txCost')}
+                  <InfoTooltip
+                    contentText={
+                      <>
+                        <p>Price Break Down</p>
+                        <table>
+                          <tr>
+                            <td>Rate on Uniswap</td>
+                            <td>$2335.45</td>
+                          </tr>
+                          <tr>
+                            <th>Gas cost</th>
+                            <th>$80.45</th>
+                          </tr>
+                          <tr>
+                            <td>Uniswap LP fee</td>
+                            <td>$13.12</td>
+                          </tr>
+                        </table>
+                      </>
+                    }
+                    position="top"
+                  >
+                    <i className="fa fa-info-circle" />
+                  </InfoTooltip>
+                </>
+              }
+              subText="0.017832 ETH $93.57"
+            />,
+            <TransactionDetailItem
+              key="total-item"
+              detailTitle={t('optimism')}
+              detailTotal="1 ETH $2340.04"
+              subTitle={
+                <>
+                  {t('txCost')}
+                  <InfoTooltip
+                    contentText={
+                      <>
+                        <p>Price Break Down</p>
+                        <table>
+                          <tr>
+                            <td>Rate on Uniswap</td>
+                            <td>$2340.04</td>
+                          </tr>
+                          <tr>
+                            <th>Azdek gas</th>
+                            <th>$9.23</th>
+                          </tr>
+                          <tr>
+                            <td>Optimism gas</td>
+                            <td>$2.12</td>
+                          </tr>
+                          <tr>
+                            <td>Uniswap LP fee</td>
+                            <td>$13.12</td>
+                          </tr>
+                          <tr>
+                            <td>Lending fee</td>
+                            <td>$18.73</td>
+                          </tr>
+                        </table>
+                      </>
+                    }
+                    position="top"
+                  >
+                    <i className="fa fa-info-circle" />
+                  </InfoTooltip>
+                </>
+              }
+              subText="0.05832 ETH $43.2"
             />,
           ]}
         />
