@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Typography from '../../ui/typography/typography';
+import Button from '../../ui/button';
+
 import {
   COLORS,
   FONT_WEIGHT,
@@ -65,6 +67,15 @@ export default function TransactionDetailItem({
         >
           {subText}
         </Typography>
+        <div className="transaction-detail-item__row">
+          <Typography
+            variant={TYPOGRAPHY.H7}
+            color={COLORS.UI4}
+            className="transaction-detail-item__subtext"
+          >
+            <Button>Select</Button>
+          </Typography>
+        </div>
       </div>
     </div>
   );
